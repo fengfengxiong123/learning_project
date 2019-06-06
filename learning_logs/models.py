@@ -13,7 +13,7 @@ class Article(models.Model):
 	art_name=models.CharField('标题',max_length=200)
 	art_add_date=models.DateTimeField(auto_now_add=True)
 	art_author=models.CharField('作者',max_length=10,default="")
-	art_owner=models.ForeignKey(User,on_delete=models.CASCADE)
+	user_owner=models.ForeignKey(User,on_delete=models.CASCADE)
 	art_type=models.CharField('类型',max_length=200)
 	art_status=models.CharField('状态',max_length=200,default="")
 	art_introduction=models.CharField('简介',max_length=200,default="")
@@ -54,6 +54,7 @@ class ArtDiscuss(models.Model):
 	discuss_add_date=models.DateTimeField(auto_now=True)
 	discuss_owner=models.ForeignKey(User,on_delete=models.CASCADE)
 	article=models.ForeignKey(Article,on_delete=models.CASCADE)
+	
 
 
 

@@ -17,12 +17,12 @@ class ArticleAdmin(admin.ModelAdmin):
 	#字段集,把字段分类后显示
 	fieldsets=[
 		('主要信息',{'fields':['art_name','art_author','art_introduction']}),
-		('次要信息',{'fields':['art_owner','art_type','art_status','art_name_used']})
+		('次要信息',{'fields':['user_owner','art_type','art_status','art_name_used']})
 	]
 
 	inlines=[ArtLabelInline]
 	#以列的形式展示对象
-	list_display=('art_name','art_author','art_owner','art_type','art_status',
+	list_display=('art_name','art_author','user_owner','art_type','art_status',
 		'art_introduction','art_name_used','art_add_date')
 	#过滤器
 	list_filter=['art_add_date']

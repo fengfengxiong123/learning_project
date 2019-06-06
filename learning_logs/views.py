@@ -6,7 +6,7 @@ from . models import Article,ArtContent,ArtLabel,ArtHot,ArtDiscuss
 from . forms import ArticleForm,ArtContentForm
 
 from rest_framework import viewsets
-from learning_logs.serializers import ArticleSerializers
+from learning_logs.serializers import ArticleSerializers,ArtContentSerializers
 
 def index(request):
 	"""主页（文章列表页）"""
@@ -31,7 +31,7 @@ def new_article(request):
 		form = ArticleForm(request.POST)
 		if form.is_valid():
 			new_article = form.save(commit=False)
-			new_article.art_owner=request.user
+			new_article.user_owner=request.user
 			new_article.save()
 			return HttpResponseRedirect(reverse('learning_logs:index'))
 	context ={'form':form}
@@ -42,7 +42,7 @@ def edit_art_content(request,article_id):
 	"""修改文章标题等内容"""
 	article = Article.objects.get(id=article_id)
 	art_content =article.artcontent_set.all()
-	if article.art_owner != request.user:
+	if article.user_owner != request.user:
 		raise Http404
 	if request.method != "POST":
 		form = ArticleForm(instance=article)
@@ -59,7 +59,7 @@ def edit_art_content(request,article_id):
 def new_chapter(request,article_id):
 	article = Article.objects.get(id=article_id)
 	art_content=article.artcontent_set.all()
-	if article.art_owner != request.user:
+	if article.user_owner != request.user:
 		raise Http404	
 	if request.method !='POST':
 		form=ArtContentForm()		
@@ -92,7 +92,7 @@ def edit_chapter(request,article_id,chapter_id):
 	#实例化具体的一章内容
 	artcontent=ArtContent.objects.get(id=chapter_id)
 	# """修改章节内容"""
-	if article.art_owner!=request.user:
+	if article.user_owner!=request.user:
 		raise Http404
 	if request.method != 'POST':
 		form=ArtContentForm(instance=artcontent)
@@ -124,3 +124,6 @@ def search(request):
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all() #集合
     serializer_class = ArticleSerializers  #序列化
+class ArtContentViewSet(viewsets.ModelViewSet):
+	queryset=ArtContent.objects.all()
+	serializer_class=ArtContentSerializers
