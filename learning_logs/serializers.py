@@ -6,7 +6,7 @@ from rest_framework import serializers
 class ArticleSerializers(serializers.HyperlinkedModelSerializer):
     #外键序列化
     user_owner=serializers.CharField(source='user_owner.username')
-    user_id = serializers.IntegerField()
+    user_id = serializers.IntegerField(source='user_owner.id')
     #使用ModelSerializer序列化model模型
     class Meta:
     #指定序列化的模型
