@@ -5,11 +5,35 @@
 {% endblock header %}
 
 {% block content %}
-<form action="{% url 'learning_logs:new_chapter' article.id%}" method='post' class="form">
+<script src="/static/jquery/jquery-3.3.1.js"></script>
+<script src="/static/jquery/kindeditor/kindeditor-all.js"></script>
+<!-- <textarea name="content" id="content"></textarea>      -->
+<script>
+    $(function () {
+        initKindEditor();
+    });
+ 
+    function initKindEditor() {
+        var kind = KindEditor.create('#content', {
+            width: '100%',       // 文本框宽度(可以百分比或像素)
+            height: '300px',     // 文本框高度(只能像素)
+            minWidth: 200,       // 最小宽度（数字）
+            minHeight: 400,      // 最小高度（数字）
+        });
+    }
+</script>
+
+<form action="{% url 'learning_logs:new_chapter' article.id%}" method='post' class="form" >
 	{% csrf_token %}
-	<table class="table">
-	{{form}}	
-	</table>
-	<button name="submit" class="btn btn-primary">发起</button>	
+    {{form}}
+	<!-- <text name="content" id="content">{{form.chapter_content}}</text> -->
+		
+	
+
+	<button name="submit" class="btn btn-primary">发起</button> 
 </form>
+  
+ 
+
+
 {% endblock content %}

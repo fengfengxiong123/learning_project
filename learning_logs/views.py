@@ -26,7 +26,7 @@ def article(request,article_id):
 	# 	num=len(artcontents)
 	# else:
 	# 	num=20
-	paginator=Paginator(artcontents,20)
+	paginator=Paginator(artcontents,10)
 	current_page=int(request.GET.get('page',1))
 	#分页标签显示7个
 	if paginator.num_pages >7 :

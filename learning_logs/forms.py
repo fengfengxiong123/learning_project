@@ -20,6 +20,7 @@ class ArtContentForm(forms.ModelForm):
 		fields=['chapter_name','chapter_content']
 		labels = {'text': ''}
 		widgets = {'text': forms.Textarea(attrs={'cols': 80})}
+		
 
 		
 	def __new__(cls, *args, **kwargs):

@@ -1,0 +1,11 @@
+ps -aux | grep uwsgi
+killall uwsgi
+cd /data/learning_log
+uwsgi -x learning_log.xml
+
+ps -ef|grep nginx
+kill -QUIT 
+cd /usr/local/nginx/sbin/
+./nginx -t
+./nginx
+./nginx -s reload 

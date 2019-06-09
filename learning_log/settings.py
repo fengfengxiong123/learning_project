@@ -88,7 +88,7 @@ DATABASES = {
     	'ENGINE': 'django.db.backends.sqlite3',
     	'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
-        #生产环境
+        # 生产环境
         # 'ENGINE': 'django.db.backends.mysql',
         # 'HOST': 'localhost',
         # 'PORT': 3306,
