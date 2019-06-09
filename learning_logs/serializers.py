@@ -1,4 +1,4 @@
-from .models import Article,ArtContent
+﻿from .models import Article,ArtContent
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 

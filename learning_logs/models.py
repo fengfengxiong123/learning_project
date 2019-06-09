@@ -33,6 +33,9 @@ class ArtContent(models.Model):
 	chapter_content=models.TextField('文章内容')	
 	article=models.ForeignKey(Article,verbose_name="文章",on_delete=models.CASCADE,null=True)
 	chapter_add_date=models.DateTimeField(auto_now=True)
+	class Meta:
+		ordering=['chapter_add_date']
+
 	
 class ArtLabel(models.Model):
 	"""标签内容表（表3）"""

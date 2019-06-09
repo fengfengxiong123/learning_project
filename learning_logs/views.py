@@ -7,6 +7,7 @@ from . forms import ArticleForm,ArtContentForm
 
 from rest_framework import viewsets
 from learning_logs.serializers import ArticleSerializers,ArtContentSerializers
+from django.core.paginator import Paginator
 
 def index(request):
 	"""主页（文章列表页）"""
@@ -18,8 +19,30 @@ def index(request):
 def article(request,article_id):
 	"""文章详情页，具体单页"""
 	article=Article.objects.get(id=article_id)
-	artcontents=article.artcontent_set.all()	
-	context = {'article':article,'artcontents':artcontents}
+	artcontents=article.artcontent_set.all()
+	#分页功能
+	#20条一页
+	# if len(artcontents)<=20:
+	# 	num=len(artcontents)
+	# else:
+	# 	num=20
+	paginator=Paginator(artcontents,20)
+	current_page=int(request.GET.get('page',1))
+	#分页标签显示7个
+	if paginator.num_pages >7 :
+		if current_page-3 < 1:
+			page_ran=range(1,8)
+		elif current_page +3 >paginator.num_pages:
+			page_ran=range(paginator.num_pages-6,paginator.num_pages+1)
+		else:
+			page_ran=range(current_page-3,current_page+4)
+		page_range=page_ran
+	else:
+		page_range=paginator.page_range
+
+
+	current_page_content=paginator.page(current_page)
+	context = {'article':article,'current_page_content':current_page_content,'page_range':page_range}
 	return render(request,'learning_logs/article.html',context)
 
 @login_required

@@ -140,6 +140,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR,'frontend/dist/static'),
+        os.path.join(BASE_DIR,'static'),
     ]
 # STATIC_ROOT = os.path.join(BASE_DIR,'learning_log/static/')
 STATIC_ROOT = '/var/searchlog/static/'

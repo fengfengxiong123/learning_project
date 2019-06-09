@@ -26,7 +26,7 @@ router.register(r'article', views.ArticleViewSet) #路由地址与接口配置
 router.register(r'artcontent', views.ArtContentViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('',include('learning_logs.urls')),
+    path('',include('learning_logs.urls')),
     path('users/', include('users.urls')),
 
     #vue.js测试页面
