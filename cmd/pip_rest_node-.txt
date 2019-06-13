@@ -1,4 +1,4 @@
-cmd  ：sysdm.cpl 环境变量快捷键
+﻿cmd  ：sysdm.cpl 环境变量快捷键
 
 pip命令
 pip install djangorestframework #安装rest
@@ -20,3 +20,4 @@ npm install webpack@4.0.0 -g #全局安装
 npm install axios --save-dev
 npm install vuex --save 	#安装vuex
 npm install jquery --save
+npm install bootstrap@4 --save

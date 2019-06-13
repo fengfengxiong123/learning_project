@@ -45,15 +45,14 @@
 
 <script>
     export default{
-        name:"Vnote",
+        name:"Vheader",
         data(){
             return{
                 routes:[
                 {url:'/',title:'首页'},
-                {url:'/note',title:'笔记'}
+                {url:'/article',title:'笔记'}
                 ],
                 currentIndex:0
-
             }
         },
         methods:{

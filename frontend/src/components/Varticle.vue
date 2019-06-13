@@ -1,5 +1,5 @@
 <template>
-    <div class="note">
+    <div class="article">
         
         <p>
         <table class="table">
@@ -19,7 +19,7 @@
         
         <tbody>                     
             <tr v-for="article in articles">
-              <th scope="row"><a href="#">{{ article.art_name }}</a></th>
+              <th scope="row"><router-link class="nav-link" :to="routes[1].url">{{ article.art_name }}</router-link></th>
               <td>{{article.art_introduction}}</td>
               <td>{{article.user_owner}}</td>
               <td>{{article.art_author}}</td>
@@ -34,9 +34,10 @@
         </table>            
         </p>
             <h3>
-                <a href="">发布</a>
+                <router-link class="nav-link" :to="routes[0].url">{{routes[0].title}}</router-link>
             </h3>
         </div>
+
 
 </template>
 <script>
@@ -44,7 +45,11 @@
         name:"Vnote",
         data(){
             return{
-                
+              routes:[
+              {url:'/new_article',title:'发布'},
+              {url:'/look_chapter',title:'发布'},
+              ],
+             
 
             }
         },
