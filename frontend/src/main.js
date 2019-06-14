@@ -12,7 +12,10 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
         //这个状态跟每个组件数据属性关联
-        alllist:[]
+        //作品列表
+        allarticlelist:[],
+        //章节列表
+        allchapterlist:[],
     },
     mutations:{
         //此方法用于修改state

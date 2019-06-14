@@ -22,11 +22,11 @@ from learning_logs import views
 from django.views.generic import TemplateView
 
 router = routers.DefaultRouter() #路由
-router.register(r'article', views.ArticleViewSet) #路由地址与接口配置
-router.register(r'artcontent', views.ArtContentViewSet)
+router.register(r'article_list', views.ArticleViewSet) #路由地址与接口配置
+router.register(r'artchapter_list', views.ArtChapterViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('',include('learning_logs.urls')),
+    path('',include('learning_logs.urls')),
     path('users/', include('users.urls')),
 
     #vue.js测试页面

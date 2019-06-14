@@ -50,7 +50,7 @@
             return{
                 routes:[
                 {url:'/',title:'首页'},
-                {url:'/article',title:'笔记'}
+                {url:'/article_list',title:'笔记'}
                 ],
                 currentIndex:0
             }

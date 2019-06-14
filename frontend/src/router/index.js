@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Vmain from '@/components/Vmain'
-import Varticle from '@/components/Varticle'
+import Varticle_list from '@/components/Varticle_list'
 import Vnew_article from '@/components/Vnew_article'
-import Vlook_chapter from '@/components/Vlook_chapter'
+import Vchapter_list from '@/components/Vchapter_list'
 import Vedit_chapter from '@/components/Vedit_chapter'
 
 Vue.use(Router)
@@ -12,30 +12,30 @@ Vue.use(Router)
 //抛出
 export default new Router({
   routes: [
-    {
+    {//主页
       path: '/',
       name: 'Vmain',//没有关系
       component: Vmain//一个路由映射一个组件
     },
-    {
-      path: '/article',
-      name: 'Varticle',//没有关系
-      component: Varticle//一个路由映射一个组件
+    {//链接作品列表
+      path: '/article_list',
+      name: 'Varticle_list',
+      component: Varticle_list
     },
-    {
+    {//链接新建作品页面
       path: '/new_article',
-      name: 'Vnew_article',//没有关系
-      component: Vnew_article//一个路由映射一个组件
+      name: 'Vnew_article',
+      component: Vnew_article
     },
-    {
-      path: '/look_chapter',
-      name: 'Vlook_chapter',//没有关系
-      component:Vlook_chapter//一个路由映射一个组件
+    { //链接到章名列表
+      path: '/chapter_list',
+      name: 'Vchapter_list',
+      component:Vchapter_list
     },
-    {
+    {//链接到章名编辑页面
       path: '/edit_chapter',
-      name: 'Vedit_chapter',//没有关系
-      component:Vedit_chapter//一个路由映射一个组件
+      name: 'Vedit_chapter',
+      component:Vedit_chapter
     },
   ]
 })

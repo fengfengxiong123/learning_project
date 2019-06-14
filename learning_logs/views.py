@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect,Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from . models import Article,ArtContent,ArtLabel,ArtHot,ArtDiscuss
-from . forms import ArticleForm,ArtContentForm
+from . models import Article,ArtChapter,ArtLabel,ArtHot,ArtDiscuss
+from . forms import ArticleForm,ArtChapterForm
 
 from rest_framework import viewsets
-from learning_logs.serializers import ArticleSerializers,ArtContentSerializers
+from learning_logs.serializers import ArticleSerializers,ArtChapterSerializers
 from django.core.paginator import Paginator
 
 def index(request):
@@ -19,14 +19,9 @@ def index(request):
 def article(request,article_id):
 	"""文章详情页，具体单页"""
 	article=Article.objects.get(id=article_id)
-	artcontents=article.artcontent_set.all()
-	#分页功能
-	#20条一页
-	# if len(artcontents)<=20:
-	# 	num=len(artcontents)
-	# else:
-	# 	num=20
-	paginator=Paginator(artcontents,10)
+	artchapters=article.artchapter_set.all()
+	
+	paginator=Paginator(artchapters,10)
 	current_page=int(request.GET.get('page',1))
 	#分页标签显示7个
 	if paginator.num_pages >7 :
@@ -41,8 +36,8 @@ def article(request,article_id):
 		page_range=paginator.page_range
 
 
-	current_page_content=paginator.page(current_page)
-	context = {'article':article,'current_page_content':current_page_content,'page_range':page_range}
+	current_page_chapter=paginator.page(current_page)
+	context = {'article':article,'current_page_chapter':current_page_chapter,'page_range':page_range}
 	return render(request,'learning_logs/article.html',context)
 
 @login_required
@@ -61,10 +56,10 @@ def new_article(request):
 	return render(request,'learning_logs/new_article.html',context)
 
 @login_required
-def edit_art_content(request,article_id):
+def edit_art_chapter(request,article_id):
 	"""修改文章标题等内容"""
 	article = Article.objects.get(id=article_id)
-	art_content =article.artcontent_set.all()
+	artchapter =article.artchapter_set.all()
 	if article.user_owner != request.user:
 		raise Http404
 	if request.method != "POST":
@@ -75,20 +70,20 @@ def edit_art_content(request,article_id):
 			form.save()
 			return HttpResponseRedirect(reverse('learning_logs:article',
 				args=[article.id]))
-	context={'article':article,'art_content':art_content,'form':form}
-	return render(request,'learning_logs/edit_art_content.html',context)
+	context={'article':article,'artchapter':artchapter,'form':form}
+	return render(request,'learning_logs/edit_art_chapter.html',context)
 
 @login_required
 def new_chapter(request,article_id):
 	article = Article.objects.get(id=article_id)
-	art_content=article.artcontent_set.all()
+	art_chapter=article.artchapter_set.all()
 	if article.user_owner != request.user:
 		raise Http404	
 	if request.method !='POST':
-		form=ArtContentForm()		
+		form=ArtChapterForm()		
 	else:
 		#post的表单中外键article字段为null	
-		form=ArtContentForm(request.POST)
+		form=ArtChapterForm(request.POST)
 
 		if form.is_valid:
 			#验证成功后需要为外键article字段，设置参数（instance.article）为实例（article）
@@ -104,8 +99,8 @@ def new_chapter(request,article_id):
 
 def look_chapter(request,chapter_id):
 	"""查看具体章节"""		
-	artcontents=ArtContent.objects.get(id=chapter_id)	
-	context={'artcontents':artcontents}
+	artchapters=ArtChapter.objects.get(id=chapter_id)	
+	context={'artchapters':artchapters}
 	return render(request,'learning_logs/look_chapter.html',context)
 
 @login_required
@@ -113,19 +108,19 @@ def edit_chapter(request,article_id,chapter_id):
 	#实例化具体一片文章
 	article=Article.objects.get(id=article_id)
 	#实例化具体的一章内容
-	artcontent=ArtContent.objects.get(id=chapter_id)
+	artchapter=ArtChapter.objects.get(id=chapter_id)
 	# """修改章节内容"""
 	if article.user_owner!=request.user:
 		raise Http404
 	if request.method != 'POST':
-		form=ArtContentForm(instance=artcontent)
+		form=ArtChapterForm(instance=artchapter)
 	else:
-		form=ArtContentForm(instance=artcontent,data=request.POST)
+		form=ArtChapterForm(instance=artchapter,data=request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(reverse('learning_logs:look_chapter',
-				args=[artcontent.id]))
-	context ={'artcontent':artcontent,'form':form,'article':article}
+				args=[artchapter.id]))
+	context ={'artchapter':artchapter,'form':form,'article':article}
 	
 	
 	return render(request,'learning_logs/edit_chapter.html',context)
@@ -147,6 +142,6 @@ def search(request):
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all() #集合
     serializer_class = ArticleSerializers  #序列化
-class ArtContentViewSet(viewsets.ModelViewSet):
-	queryset=ArtContent.objects.all()
-	serializer_class=ArtContentSerializers
+class ArtChapterViewSet(viewsets.ModelViewSet):
+	queryset=ArtChapter.objects.all()
+	serializer_class=ArtChapterSerializers

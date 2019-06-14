@@ -19,7 +19,9 @@
         
         <tbody>                     
             <tr v-for="article in articles">
-              <th scope="row"><router-link class="nav-link" :to="routes[1].url">{{ article.art_name }}</router-link></th>
+              <!-- <th scope="row"><router-link class="nav-link" :to="routes[1].url">{{ article.art_name }}</router-link></th> -->
+              <th scope="row"><router-link class="nav-link" :to="{path:'/chapter_list',query:{id:article.id}}">{{ article.art_name }}</router-link></th>
+              
               <td>{{article.art_introduction}}</td>
               <td>{{article.user_owner}}</td>
               <td>{{article.art_author}}</td>
@@ -35,6 +37,7 @@
         </p>
             <h3>
                 <router-link class="nav-link" :to="routes[0].url">{{routes[0].title}}</router-link>
+
             </h3>
         </div>
 
@@ -42,7 +45,7 @@
 </template>
 <script>
     export default{
-        name:"Vnote",
+        name:"Varticle_list",
         data(){
             return{
               routes:[
@@ -55,7 +58,7 @@
         },
         computed:{
             articles(){
-               return this.$store.state.alllist; 
+               return this.$store.state.allarticlelist; 
             }
         }
     }

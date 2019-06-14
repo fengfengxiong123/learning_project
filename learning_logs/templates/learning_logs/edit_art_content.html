@@ -9,7 +9,7 @@
 
 
 {% block content %}
-<form class="form" action="{% url 'learning_logs:edit_art_content' article.id %}" method='post'>
+<form class="form" action="{% url 'learning_logs:edit_art_chapter' article.id %}" method='post'>
 	{% csrf_token %}
 	<table class="table">
 		{{form}}

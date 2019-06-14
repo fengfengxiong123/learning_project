@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article,ArtContent
+from .models import Article,ArtChapter
 
 from django.forms import ModelForm
 
@@ -14,9 +14,9 @@ class ArticleForm(forms.ModelForm):
 		labels = {'text': ''}
 		widgets = {'text': forms.Textarea(attrs={'cols': 80})}
 
-class ArtContentForm(forms.ModelForm):
+class ArtChapterForm(forms.ModelForm):
 	class Meta:
-		model=ArtContent
+		model=ArtChapter
 		fields=['chapter_name','chapter_content']
 		labels = {'text': ''}
 		widgets = {'text': forms.Textarea(attrs={'cols': 80})}

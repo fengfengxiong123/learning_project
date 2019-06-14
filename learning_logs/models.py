@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 #一对多
 #User（系统自带）--Article（表1）
-#Article（表1）--ArtContent（表2）
+#Article（表1）--ArtChapter（表2）
 #Article（表1）--ArtLabel（表3）
 #Article（表1）--ArtDiscuss（表5）
 #User（系统自带）--ArtDiscuss（表5）
@@ -27,7 +27,7 @@ class Article(models.Model):
 			#限制返回文章名字符数
 		return art_name_limit 
 
-class ArtContent(models.Model):
+class ArtChapter(models.Model):
 	"""文章章节内容表(表2）"""	
 	chapter_name=models.CharField('章名',max_length=200)
 	chapter_content=models.TextField('文章内容')	

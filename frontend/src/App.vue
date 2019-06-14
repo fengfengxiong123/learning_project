@@ -28,16 +28,28 @@ export default {
 
     var _this=this;
     $.ajax({
-      url:'http://127.0.0.1:8000/api/article/',
+      url:'http://127.0.0.1:8000/api/article_list/',
       methods:'get',
       success:function(data){
         console.log(data);
 
-        _this.$store.state.alllist=data;
+        _this.$store.state.allarticlelist=data;
         // console.log(_this);
       }
 
-    })
+    });
+    $.ajax({
+      url:'http://127.0.0.1:8000/api/artchapter_list/',
+      methods:'get',
+      success:function(data){
+        console.log(data);
+
+        _this.$store.state.allchapterlist=data;
+        
+      }
+
+    });
+
   },
 }
 </script>

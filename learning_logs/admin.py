@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 #引用
-from learning_logs.models import Article,ArtContent,ArtLabel,ArtHot,ArtDiscuss
+from learning_logs.models import Article,ArtChapter,ArtLabel,ArtHot,ArtDiscuss
 
 class  ArtLabelInline(admin.TabularInline):
 	"""文章内容页面折叠显示在文章页面"""
@@ -31,7 +31,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article,ArticleAdmin)
-admin.site.register(ArtContent)
+admin.site.register(ArtChapter)
 admin.site.register(ArtLabel)
 admin.site.register(ArtHot)
 admin.site.register(ArtDiscuss)
