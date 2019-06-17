@@ -19,7 +19,7 @@
         
         <tbody>                     
             <tr v-for="article in articles">
-              <!-- <th scope="row"><router-link class="nav-link" :to="routes[1].url">{{ article.art_name }}</router-link></th> -->
+              
               <th scope="row"><router-link class="nav-link" :to="{path:'/chapter_list',query:{id:article.id}}">{{ article.art_name }}</router-link></th>
               
               <td>{{article.art_introduction}}</td>

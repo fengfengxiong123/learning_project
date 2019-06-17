@@ -5,8 +5,7 @@ from django.contrib.auth.decorators import login_required
 from . models import Article,ArtChapter,ArtLabel,ArtHot,ArtDiscuss
 from . forms import ArticleForm,ArtChapterForm
 
-from rest_framework import viewsets
-from learning_logs.serializers import ArticleSerializers,ArtChapterSerializers
+
 from django.core.paginator import Paginator
 
 def index(request):
@@ -138,10 +137,14 @@ def search(request):
 	articles=Article.objects.filter(art_name__icontains=search_name)
 	return render(request,'learning_logs/search_results.html',
 		{'error_msg': error_msg,'articles': articles})
+#-------------------------------------
+from rest_framework import viewsets
+from learning_logs.serializers import ArticleSerializers,ArtChapterSerializers
 
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all() #集合
     serializer_class = ArticleSerializers  #序列化
+
 class ArtChapterViewSet(viewsets.ModelViewSet):
 	queryset=ArtChapter.objects.all()
 	serializer_class=ArtChapterSerializers

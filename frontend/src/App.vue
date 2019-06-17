@@ -17,6 +17,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import $ from 'jquery'
 export default {
   name: 'App',
+  data(){
+    return{
+
+    }
+  },
   components:{
     Vheader,
     Vfooter,
@@ -28,8 +33,8 @@ export default {
 
     var _this=this;
     $.ajax({
-      url:'http://127.0.0.1:8000/api/article_list/',
-      methods:'get',
+      url:'http://127.0.0.1:8000/api/v1/article_list/',
+      // methods:'get',
       success:function(data){
         console.log(data);
 
@@ -39,8 +44,8 @@ export default {
 
     });
     $.ajax({
-      url:'http://127.0.0.1:8000/api/artchapter_list/',
-      methods:'get',
+      url:'http://127.0.0.1:8000/api/v1/artchapter_list/',
+      // methods:'get',
       success:function(data){
         console.log(data);
 

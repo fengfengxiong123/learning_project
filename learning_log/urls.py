@@ -32,7 +32,7 @@ urlpatterns = [
     #vue.js测试页面
     path('', TemplateView.as_view(template_name="index.html")),
 
-    re_path(r'^api/', include(router.urls)), #包含进路由配置的url
+    re_path(r'^api/v1/', include(router.urls)), #包含进路由配置的url
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
         #浏览器测试接口配置
 ]
