@@ -95,7 +95,6 @@ def new_chapter(request,article_id):
 	context={'form':form,'article':article}
 	return render(request,'learning_logs/new_chapter.html',context)
 
-
 def look_chapter(request,chapter_id):
 	"""查看具体章节"""		
 	artchapters=ArtChapter.objects.get(id=chapter_id)	
@@ -124,7 +123,6 @@ def edit_chapter(request,article_id,chapter_id):
 	
 	return render(request,'learning_logs/edit_chapter.html',context)
 	
-
 def search(request):
 	"""搜索功能"""
 	search_name=request.GET.get('search_name')
@@ -148,3 +146,11 @@ class ArticleViewSet(viewsets.ModelViewSet):
 class ArtChapterViewSet(viewsets.ModelViewSet):
 	queryset=ArtChapter.objects.all()
 	serializer_class=ArtChapterSerializers
+
+#----------------------------------
+from rest_framework.views import APIView
+from django.http import HttpResponse
+class DjangoView(APIView):
+	def post(self,request,*args,**kwargs):
+		print(request._request)
+		return HttpResponse("post和body")

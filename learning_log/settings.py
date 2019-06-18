@@ -46,7 +46,12 @@ INSTALLED_APPS = [
 
     'rest_framework',
 ]
+REST_FRAMEWORK={
 
+    #解析器全局配置
+    "DEFAULT_PARSER_CLASSES":['rest_framework.parsers.JSONParser',
+    'rest_framework.parsers.FormParser']
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
