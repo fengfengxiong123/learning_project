@@ -135,22 +135,52 @@ def search(request):
 	articles=Article.objects.filter(art_name__icontains=search_name)
 	return render(request,'learning_logs/search_results.html',
 		{'error_msg': error_msg,'articles': articles})
-#-------------------------------------
-from rest_framework import viewsets
-from learning_logs.serializers import ArticleSerializers,ArtChapterSerializers
 
-class ArticleViewSet(viewsets.ModelViewSet):
-    queryset = Article.objects.all() #集合
-    serializer_class = ArticleSerializers  #序列化
 
-class ArtChapterViewSet(viewsets.ModelViewSet):
-	queryset=ArtChapter.objects.all()
-	serializer_class=ArtChapterSerializers
 
-#----------------------------------
 from rest_framework.views import APIView
 from django.http import HttpResponse
-class DjangoView(APIView):
+
+from rest_framework import serializers
+
+#方法一
+# class ArticleSerializer(serializers.Serializer):
+# 	art_name=serializers.CharField()
+# import json
+# from learning_logs import models
+# class ArticleView(APIView):
+# 	def get(self,request,*args,**kwargs):
+# 		articles=models.Article.objects.all()
+# 		ser=ArticleSerializer(instance=articles,many=True)
+# 		ret=json.dumps(ser.data,ensure_ascii=False)
+# 		return HttpResponse(ret)
+
+#方法二：使用ModelSerializer类
+from learning_logs import models
+class ArticleSerializer(serializers.ModelSerializer):
+	class Meta:
+		model=models.Article
+		# fields='__all__'
+		# depth=1
+		# fields=['art_name','art_add_date','art_author','user_owner','art_type','art_status','art_introduction']
+		fields=['art_name','user_owner']
+import json
+class ArticleView(APIView):
+	def get(self,request,*args,**kwargs):
+		articles=models.Article.objects.all()
+		ser=ArticleSerializer(instance=articles,many=True)
+		ret=json.dumps(ser.data,ensure_ascii=False)
+
+		return HttpResponse(ret)
+
 	def post(self,request,*args,**kwargs):
-		print(request._request)
-		return HttpResponse("post和body")
+		ser =ArticleSerializer(data=request.data)
+		if ser.is_valid():
+			article=ser.save()
+			user_owner=models.Article.objects.filter(id__in=request.data['user_owner'])
+			article.user_owner=user_owner
+			
+			return HttpResponse(ser.data)
+		else:
+			
+			return HttpResponse(ser.errors)
