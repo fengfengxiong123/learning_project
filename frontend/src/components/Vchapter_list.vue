@@ -1,8 +1,11 @@
 <template>
    <div>
-      <div v-for="chapter in chapterlists">       
-        <router-link class="nav-link" :to="{path:'/edit_chapter',query:{id:art_id,idd:chapter.id}}" v-if="chapter.article_id==art_id">
-          {{chapter.chapter_name}}
+
+      <div v-for="artchapter in artchapters">       
+
+        <router-link class="nav-link" :to="{path:'/edit_chapter',query:{id:artchapter.article_id,idd:artchapter.id}}" v-if="art_id==artchapter.article_id">
+
+          {{artchapter.chapter_name}}
         </router-link>
       </div>
    </div>
@@ -12,14 +15,14 @@
         name:"Vchapter_list",
         data(){
             return{
-              //art_id为作品id
+              //article文章列表页面传递过来的参数 route.query.id给art_id
               art_id:this.$route.query.id,
               
             }
         },
         computed:{
-            chapterlists(){
-               return this.$store.state.allchapterlist;//
+            artchapters(){
+               return this.$store.state.allchapterlist;
             },
         },
   }

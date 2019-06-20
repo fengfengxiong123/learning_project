@@ -34,7 +34,7 @@ export default {
 
     var _this=this;
     $.ajax({
-      url:'http://127.0.0.1:8000/api/v1/article_list/',
+      url:'http://127.0.0.1:8000/api/v1/article/',
       methods:'get',
       datatype:'json',
       success:function(data){
@@ -45,17 +45,17 @@ export default {
       }
 
     });
-    // $.ajax({
-    //   url:'http://127.0.0.1:8000/api/v1/artchapter_list/',
-    //   // methods:'get',
-    //   success:function(data){
-    //     console.log(data);
+    $.ajax({
+      url:'http://127.0.0.1:8000/api/v1/artchapter/',
+      // methods:'get',
+      success:function(data){
+        // console.log(data);
 
-    //     _this.$store.state.allchapterlist=data;
+        _this.$store.state.allchapterlist=JSON.parse(data);
         
-    //   }
+      }
 
-    // });
+    });
 
   },
 }

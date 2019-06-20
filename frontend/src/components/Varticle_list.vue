@@ -25,7 +25,7 @@
               <th scope="row"><router-link class="nav-link" :to="{path:'/chapter_list',query:{id:article.id}}">{{ article.art_name }}</router-link></th>
               
               <td>{{article.art_introduction}}</td>
-              <td>{{article.user_owner.username}}</td>
+              <td>{{article.user_owner_username}}</td>
               <td>{{article.art_author}}</td>
               <td>{{article.art_status}}</td>
               <td>{{article.art_type}}</td>
@@ -60,8 +60,9 @@
         computed:{
             articles(){
                return this.$store.state.allarticlelist; 
-            }
-        }
+            },           
+        },
+    
     }
 </script>
 

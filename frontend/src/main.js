@@ -16,16 +16,6 @@ const store = new Vuex.Store({
         allarticlelist:[],
         //章节列表
         allchapterlist:[],
-        note:{
-          art_name:'',
-          art_type:'',
-          user_owner:'admin',
-          user_id:'1',
-          art_introduction:'admin',
-          art_name_used:'',
-          art_status:'完结',
-
-        }
     },
     mutations:{
         //此方法用于修改state
