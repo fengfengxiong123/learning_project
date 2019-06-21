@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField #富文本
 #一对多
 #User（系统自带）--Article（表1）
 #Article（表1）--ArtChapter（表2）
@@ -31,7 +32,7 @@ class Article(models.Model):
 class ArtChapter(models.Model):
 	"""文章章节内容表(表2）"""	
 	chapter_name=models.CharField('章名',max_length=200)
-	chapter_content=models.TextField('文章内容')	
+	chapter_content=HTMLField('文章内容')
 	article=models.ForeignKey(Article,verbose_name="文章",on_delete=models.CASCADE,null=True)
 	chapter_add_date=models.DateTimeField(auto_now=True)
 	class Meta:

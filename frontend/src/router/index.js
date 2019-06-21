@@ -5,7 +5,7 @@ import Vmain from '@/components/Vmain'
 import Varticle_list from '@/components/Varticle_list'
 import Vnew_article from '@/components/Vnew_article'
 import Vchapter_list from '@/components/Vchapter_list'
-import Vedit_chapter from '@/components/Vedit_chapter'
+import Vlook_chapter from '@/components/Vlook_chapter'
 
 Vue.use(Router)
 
@@ -33,9 +33,9 @@ export default new Router({
       component:Vchapter_list
     },
     {//链接到章名编辑页面
-      path: '/edit_chapter',
-      name: 'Vedit_chapter',
-      component:Vedit_chapter
+      path: '/look_chapter',
+      name: 'Vlook_chapter',
+      component:Vlook_chapter
     },
   ]
 })

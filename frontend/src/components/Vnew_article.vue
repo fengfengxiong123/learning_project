@@ -1,5 +1,5 @@
 <template>
-   <div >
+   <div class="Vnew_article">
        {{msg}}
        请输入：<input type="text" name="" v-model="art_nameHander"/>
        请输入：<input type="text" name="" v-model="art_typeHander"/>

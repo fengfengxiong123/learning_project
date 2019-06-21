@@ -37,14 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 第三方应用程序
-    
-    'corsheaders',
-
+   #我的应用
     'learning_logs',
+    # 第三方应用程序
+    'corsheaders',
     'users',
-
+    #rest前后端分离
     'rest_framework',
+    #富文本编辑器
+    'tinymce',
 ]
 REST_FRAMEWORK={
 

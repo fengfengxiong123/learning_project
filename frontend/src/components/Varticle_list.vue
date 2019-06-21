@@ -1,5 +1,5 @@
 <template>
-    <div class="article">
+    <div class="container">
         
         <p>
          
@@ -38,7 +38,7 @@
         </table>            
         </p>
             <h3>
-                <router-link class="nav-link" :to="routes[0].url">{{routes[0].title}}</router-link>
+                <router-link  :to="routes[0].url">{{routes[0].title}}</router-link>
 
             </h3>
         </div>

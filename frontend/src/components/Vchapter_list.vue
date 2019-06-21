@@ -1,12 +1,10 @@
 <template>
-   <div>
+   <div class="container rowrow">
 
-      <div v-for="artchapter in artchapters">       
-
-        <router-link class="nav-link" :to="{path:'/edit_chapter',query:{id:artchapter.article_id,idd:artchapter.id}}" v-if="art_id==artchapter.article_id">
-
-          {{artchapter.chapter_name}}
-        </router-link>
+      <div class="nav-link" v-for="artchapter in artchapters" v-if="art_id==artchapter.article_id"> 
+          <router-link  :to="{path:'/look_chapter',query:{id:artchapter.article_id,idd:artchapter.id}}" >
+         {{artchapter.chapter_name}}
+         </router-link>
       </div>
    </div>
 </template>
@@ -29,4 +27,11 @@
 </script>
 
 <style>
+.rowrow{
+  column-count:2;
+  -webkit-column-count:2;
+  -moz-column-count:2; 
+}
+
+
 </style>

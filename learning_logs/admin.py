@@ -4,9 +4,9 @@ from django.contrib import admin
 #引用
 from learning_logs.models import Article,ArtChapter,ArtLabel,ArtHot,ArtDiscuss
 
-class  ArtLabelInline(admin.TabularInline):
+class  ArtChapterInline(admin.TabularInline):
 	"""文章内容页面折叠显示在文章页面"""
-	model=ArtLabel
+	model=ArtChapter
 	extra=1
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -20,7 +20,7 @@ class ArticleAdmin(admin.ModelAdmin):
 		('次要信息',{'fields':['user_owner','art_type','art_status','art_name_used']})
 	]
 
-	inlines=[ArtLabelInline]
+	inlines=[ArtChapterInline]
 	#以列的形式展示对象
 	list_display=('art_name','art_author','user_owner','art_type','art_status',
 		'art_introduction','art_name_used','art_add_date')
@@ -31,7 +31,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article,ArticleAdmin)
-admin.site.register(ArtChapter)
+# admin.site.register(ArtChapter)
 admin.site.register(ArtLabel)
 admin.site.register(ArtHot)
 admin.site.register(ArtDiscuss)

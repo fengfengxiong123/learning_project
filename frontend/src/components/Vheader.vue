@@ -1,6 +1,7 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">文章</a>
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light container">
+  <a class="navbar-brand" href="/">首页</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -41,6 +42,7 @@
 
   </div>
 </nav>
+</div>
 </template>
 
 <script>
@@ -49,8 +51,8 @@
         data(){
             return{
                 routes:[
-                {url:'/',title:'首页'},
-                {url:'/article_list',title:'笔记'}
+                // {url:'/animation',title:'动漫'},
+                {url:'/article_list',title:'书圈'}
                 ],
                 currentIndex:0
             }
