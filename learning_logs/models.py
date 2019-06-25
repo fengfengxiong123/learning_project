@@ -18,7 +18,6 @@ class Article(models.Model):
 	art_type=models.CharField('类型',max_length=200)
 	art_status=models.CharField('状态',max_length=200,default="")
 	art_introduction=models.CharField('简介',max_length=200,default="")
-	
 	art_name_used=models.CharField('曾用名',max_length=200,default="")
 		
 	def __str__(self):

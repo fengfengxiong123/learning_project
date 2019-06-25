@@ -13,7 +13,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('',include('learning_logs.urls')),
-    # path('users/', include('users.urls')),
+    path('users/', include('users.urls')),
 
     #vue.js测试页面
     # path('', TemplateView.as_view(template_name="index.html")),

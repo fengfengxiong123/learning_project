@@ -3,7 +3,7 @@
 
       <div class="nav-link" v-for="artchapter in artchapters" v-if="art_id==artchapter.article_id"> 
           <router-link  :to="{path:'/look_chapter',query:{id:artchapter.article_id,idd:artchapter.id}}" >
-         {{artchapter.chapter_name}}
+         <pre>{{artchapter.chapter_name}}</pre>
          </router-link>
       </div>
    </div>
@@ -31,6 +31,11 @@
   column-count:2;
   -webkit-column-count:2;
   -moz-column-count:2; 
+pre{
+    font-family: "微软雅黑";
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 }
 
 

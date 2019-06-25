@@ -39,5 +39,6 @@
 <style>
 div.card-body{
   padding-bottom:5%;
+  word-wrap: break-word;
 }
 </style>
