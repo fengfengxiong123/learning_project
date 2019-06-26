@@ -21,6 +21,7 @@ def search(request):
 
 from rest_framework.views import APIView
 from django.http import HttpResponse
+
 from rest_framework import serializers
 import json
 class ArtChapterSerializer(serializers.Serializer):
@@ -35,7 +36,7 @@ class ArtChapterView(APIView):
 		artchapter=ArtChapter.objects.all()
 		ser=ArtChapterSerializer(instance=artchapter,many=True)
 		ret=json.dumps(ser.data,ensure_ascii=False)
-		print(type(ret))
+		# print(type(ret))
 		return HttpResponse(ret)
 
 class ArticleSerializer(serializers.Serializer):
@@ -49,9 +50,28 @@ class ArticleSerializer(serializers.Serializer):
 	art_status=serializers.CharField()
 	art_introduction=serializers.CharField()
 
+
 class ArticleView(APIView):
 	def get(self,request,*args,**kwargs):
 		article=Article.objects.all()
 		ser=ArticleSerializer(instance=article,many=True)
 		ret=json.dumps(ser.data,ensure_ascii=False)
+		# print(type(ret))
 		return HttpResponse(ret)
+
+
+	def post(self,request,*args,**kwargs):
+		print(type(request.data))
+		ser=ArticleSerializer(data=request.data)
+		print(type(ser))
+		if ser.is_valid():
+			ser.save()
+			return HttpResponse(ser.data)
+		print(type(ser))
+		return HttpResponse(ser.errors)
+
+
+
+
+
+

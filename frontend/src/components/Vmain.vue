@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    首页
+                    主页
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">Special title treatment</h5>

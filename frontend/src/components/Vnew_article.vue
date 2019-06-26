@@ -19,32 +19,22 @@
         },
         methods:{
           addArticle(){
+            var _this=this;
             var json={
               art_name:this.art_nameHander,
               art_type:this.art_typeHander,
-              user_owner:'admin',
-              user_id:'1',
 
-              
-              
-              art_introduction: "admin",
-              
-              art_name_used: "",
-              art_status: "完结",
-              
-              
-              
-              
             }
             console.log(json);
-            var _this=this;
+            
             $.ajax({
-              url:"http://127.0.0.1:8000/api/v1/article_list/",
+              url:"http://127.0.0.1:8000/api/v1/article/",
               type:'post',
-              data:json,
+              data:'json',
               success:function(data){
-                console.log(data);
+                
                 _this.$store.state.allarticlelist=data;
+                console.log(data);
               },
               error:function(err){
                 console.log(err);
@@ -55,20 +45,20 @@
         computed:{
           art_nameHander:{
             set:function(newValue){
-              // console.log(newValue)
-              this.$store.state.note.art_name=newValue;
+              console.log(newValue)
+              this.$store.state.allarticlelist.art_name=newValue;
             },
             get:function(){
-              return this.$store.state.note.art_name;
+              return this.$store.state.allarticlelist.art_name;
             }
           },
           art_typeHander:{
             set:function(newValue){
-              // console.log(newValue)
-              this.$store.state.note.art_type=newValue;
+              console.log(newValue)
+              this.$store.state.allarticlelist.art_type=newValue;
             },
             get:function(){
-              return this.$store.state.note.art_type;
+              return this.$store.state.allarticlelist.art_type;
             }
           },
           // user_ownerHander:{
