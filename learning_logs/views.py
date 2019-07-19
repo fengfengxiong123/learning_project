@@ -40,7 +40,7 @@ class ArtChapterView(APIView):
 		return HttpResponse(ret)
 
 class ArticleSerializer(serializers.Serializer):
-	id=serializers.IntegerField()
+	# id=serializers.IntegerField()
 	art_name=serializers.CharField()
 	art_add_date=serializers.DateTimeField(read_only=True)
 	art_author=serializers.CharField()
@@ -50,7 +50,7 @@ class ArticleSerializer(serializers.Serializer):
 	art_status=serializers.CharField()
 	art_introduction=serializers.CharField()
 
-
+from django.contrib.auth.models import User
 class ArticleView(APIView):
 	def get(self,request,*args,**kwargs):
 		article=Article.objects.all()
@@ -59,16 +59,18 @@ class ArticleView(APIView):
 		# print(type(ret))
 		return HttpResponse(ret)
 
-
 	def post(self,request,*args,**kwargs):
-		print(type(request.data))
-		ser=ArticleSerializer(data=request.data)
-		print(type(ser))
+		dat=request.data
+
+		ser=ArticleSerializer(data=dat)
+
 		if ser.is_valid():
 			ser.save()
 			return HttpResponse(ser.data)
-		print(type(ser))
-		return HttpResponse(ser.errors)
+		else:
+			print(ser)
+			print(ser.errors)
+			return HttpResponse(ser.errors)
 
 
 

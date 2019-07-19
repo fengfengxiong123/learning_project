@@ -1,0 +1,8 @@
+以管理员身份打开cmd命令
+切换工作目录  cd D:\Program Files\mysql-8.0.16-winx64\bin
+初始化数据库 mysqld --initialize --console
+保存默认密码  
+安装服务 mysqld install
+启动服务 net start mysql
+登录本机的 MySQL 数据库 mysql -u root -p
+修改初始密码 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456'; 
