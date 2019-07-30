@@ -5,6 +5,7 @@ pip install djangorestframework #安装rest
 pip install markdown #安装markdown
 pip freeze > requirements.txt #安装的依赖
 pip install django-cors-headers #在Django层注入header,之后可以在dist文件运行npm run dev命令
+pip install django-tinymce	#安装富文本
 
 node.js  &vue.js
 https://nodejs.org/en/
