@@ -1,40 +1,29 @@
 <template>
     <div class="container">
-        
         <p>
-         
         <table class="table">
-       
-            <thead v-if="articles">
-                <tr>
-                  <th scope="col">文章名</th>
-                  <th scope="col">简介</th>
-                  <th scope="col">发布人</th>
-                  <th scope="col">作者</th>
-                  <th scope="col">状态</th>
-                  <th scope="col">类型</th>
-                  <th scope="col">添加日期</th>
-                </tr>
-             </thead>
-        
-        
-        <tbody>         
-                    
+          <thead v-if="articles">
+            <tr>
+              <th scope="col">文章名</th>
+              <th scope="col">简介</th>
+              <!-- <th scope="col">发布人</th> -->
+              <th scope="col">作者</th>
+              <!-- <th scope="col">状态</th> -->
+              <th scope="col">类型</th>
+              <th scope="col">日期</th>
+            </tr>
+          </thead>    
+          <tbody>    
             <tr v-for="article in articles">
-             
               <th scope="row"><router-link class="nav-link" :to="{path:'/chapter_list',query:{id:article.id}}">{{ article.art_name }}</router-link></th>
-              
               <td>{{article.art_introduction}}</td>
-              <td>{{article.user_owner_username}}</td>
+              <!-- <td>{{article.user_owner_username}}</td> -->
               <td>{{article.art_author}}</td>
-              <td>{{article.art_status}}</td>
+              <!-- <td>{{article.art_status}}</td> -->
               <td>{{article.art_type}}</td>
               <td>{{article.art_add_date}}</td>
             </tr>                                       
-        </tbody>
-      
-           <!--  <li>没有文章</li> -->
-       
+          </tbody>
         </table>            
         </p>
             <h3>

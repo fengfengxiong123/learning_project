@@ -97,16 +97,18 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 DATABASES = {
     'default': {
         #开发环境
-    	'ENGINE': 'django.db.backends.sqlite3',
-    	'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    	# 'ENGINE': 'django.db.backends.sqlite3',
+    	# 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         # 生产环境
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'HOST': 'localhost',
-        # 'PORT': 3306,
-        # 'NAME': 'll_db',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'PORT': 3306,
+        'NAME': 'll_db',
         # 'USERNAME': 'root',
-        # 'PASSWORD': 'Liangfeng0504@',
+        'USER': 'root',
+
+        'PASSWORD': 'Liangfeng0504@',
         
     }
 }

@@ -42,13 +42,19 @@ class ArtChapterView(APIView):
 class ArticleSerializer(serializers.Serializer):
 	# id=serializers.IntegerField()
 	art_name=serializers.CharField()
-	art_add_date=serializers.DateTimeField(read_only=True)
+	art_add_date=serializers.DateTimeField(read_only=True,format="%Y-%m-%d")
 	art_author=serializers.CharField()
 	user_owner_id=serializers.CharField(source='user_owner.id',read_only=True)
 	user_owner_username = serializers.CharField(source='user_owner.username', read_only=True)
 	art_type=serializers.CharField()
 	art_status=serializers.CharField()
 	art_introduction=serializers.CharField()
+	art_name_used=serializers.CharField()
+
+	def create(self, validated_data):
+		validated_data.update(user_owner_id=1)
+		article=Article.objects.create(**validated_data)
+		return article
 
 from django.contrib.auth.models import User
 class ArticleView(APIView):
@@ -56,21 +62,23 @@ class ArticleView(APIView):
 		article=Article.objects.all()
 		ser=ArticleSerializer(instance=article,many=True)
 		ret=json.dumps(ser.data,ensure_ascii=False)
+		print(ret)
 		# print(type(ret))
 		return HttpResponse(ret)
 
 	def post(self,request,*args,**kwargs):
 		dat=request.data
-
 		ser=ArticleSerializer(data=dat)
-
 		if ser.is_valid():
 			ser.save()
+			print('验证成功并保存')
 			return HttpResponse(ser.data)
+
 		else:
-			print(ser)
 			print(ser.errors)
+			print('验证失败未保存')
 			return HttpResponse(ser.errors)
+
 
 
 
