@@ -1,3 +1,6 @@
 1、npm run build 
 2、把dist文件夹和package.json上传到目录中
 3、新建app.js
+4、安装依赖 npm install
+5、安装pm2
+6、启动vue项目 pm2 start app.js
