@@ -1,4 +1,0 @@
-﻿[pid: 3246|app: 0|req: 29/80] 219.148.91.39 () {46 vars in 876 bytes} [Fri Apr 26 03:57:30 2019] GET / => generated 1968 bytes in 7 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 0)
-[pid: 3245|app: 0|req: 26/81] 219.148.91.39 () {46 vars in 855 bytes} [Fri Apr 26 03:57:30 2019] GET /favicon.ico => generated 85 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 100 bytes (1 switches on core 0)
-[pid: 3244|app: 0|req: 15/82] 219.148.91.39 () {48 vars in 907 bytes} [Fri Apr 26 03:57:33 2019] GET / => generated 1957 bytes in 7 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 0)
-[pid: 3245|app: 0|req: 27/83] 219.148.91.39 () {48 vars in 907 bytes} [Fri Apr 26 03:57:34 2019] GET / => generated 2023 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 0)

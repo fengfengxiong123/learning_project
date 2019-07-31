@@ -35,7 +35,7 @@ export default {
 
     var _this=this;
     $.ajax({
-      url:'http://127.0.0.1:8000/api/v1/article/',
+      url:'http://47.105.219.123:8000/api/v1/article/',
       methods:'get',
       datatype:'json',
       success:function(data){
@@ -47,7 +47,7 @@ export default {
 
     });
     $.ajax({
-      url:'http://127.0.0.1:8000/api/v1/artchapter/',
+      url:'http://47.105.219.123:8000/api/v1/artchapter/',
       // methods:'get',
       success:function(data){
         // console.log(data);
