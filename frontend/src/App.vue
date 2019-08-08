@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    
+  <div id="app">    
     <Vheader></Vheader>
-
     <router-view/> 
     <!-- 出口 -->
     <Vfooter></Vfooter>
@@ -11,6 +9,7 @@
 </template>
 
 <script>
+//使用import导入组件
 import Vheader from "./components/Vheader"
 import Vfooter from "./components/Vfooter"
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -32,32 +31,7 @@ export default {
 
   },
   mounted(){
-
-    var _this=this;
-    $.ajax({
-      url:'http://47.105.219.123:8000/api/v1/article/',
-      methods:'get',
-      datatype:'json',
-      success:function(data){
-        // console.log(data);
-       // 使用 JSON.parse() 方法将字符串数据转换为 JavaScript 对象
-         _this.$store.state.allarticlelist=JSON.parse(data);
-        // console.log(allarticlelist);
-      }
-
-    });
-    $.ajax({
-      url:'http://47.105.219.123:8000/api/v1/artchapter/',
-      // methods:'get',
-      success:function(data){
-        // console.log(data);
-
-        _this.$store.state.allchapterlist=JSON.parse(data);
-        
-      }
-
-    });
-
+    
   },
 }
 </script>

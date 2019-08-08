@@ -4,3 +4,4 @@
 4、安装依赖 npm install
 5、安装pm2
 6、启动vue项目 pm2 start app.js
+查看所有tcp端口：netstat -ntlp

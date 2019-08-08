@@ -1,0 +1,68 @@
+业务逻辑:客户端请求网站首页->nginx收到请求，进入vue项目目录->当vue项目请求的接口(api)时
+->nginx收到请求，生成代理进入服务器的其他端口(即端)->调用后端接口
+1 客户端请求网站首页 http://www.test.com
+2 配置nginx
+    server {
+        listen       80; #默认端口 也就是用户请求网站首页时使用的
+        server_name  127.0.0.1 www.ohlaa.com;
+        location / {
+           root /data/dist; #vue项目前端使用 npm run build 命令生成的dist文件夹
+           index index.html;
+        }
+        location /api/{
+            rewrite ^.+api/?(.*)$ /api/$1 break; #对vue项目请求接口(api)进行匹配
+            proxy_pass http://127.0.0.1:8001; #匹配到之后转发到服务器的其他端口
+        }
+    }          
+    server {
+        listen       8001; #请求后端api使用的接口
+        server_name  127.0.0.1;
+
+        charset      utf-8;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            include uwsgi_params; #使用uwsgi
+            uwsgi_pass 127.0.0.1:6666; #uwsgi使用的接口
+            uwsgi_param UWSGI_SCRIPT learning_log.wsgi;  #知道python项目中的wsgi 相对于项目根目录
+            uwsgi_param UWSGI_CHDIR /data/learning_log;   #项目根目录
+        }
+        location /static/ {
+            alias /var/searchlog/static/; #项目静态路径设置
+        }
+3 配置uwsgi
+    [uwsgi]
+    # Django-related settings
+    # the base directory (full path)     项目的绝对路径
+    chdir           = /data/learning_log
+    # Django's wsgi file                        带有wsgi.py的文件路径(相对路径)
+    module          = learning_log.wsgi
+    # the virtualenv (full path)
+    # home            = /root/Envs/s17luffy   虚拟环境的路径   (cdvirtualenv 进入  pwd查看  )
+    # process-related settings
+    # master
+    master          = true
+    # maximum number of worker processes
+    processes       = 1
+    # the socket (use the full path to be safe
+    socket          = 0.0.0.0:6666
+    # ... with appropriate permissions - may be needed
+    # chmod-socket    = 664
+    # clear environment on exit
+    vacuum          = true
+
+4 vue项目请求接口
+    $.ajax({
+      url:'http://www.ohlaa.com/api/v1/article/',
+      }
+5 python后端接口路由
+    项目url:
+        urlpatterns = [
+            re_path(r'^',include('learning_logs.urls')),
+        ]
+    应用url:
+        app_name='learning_logs'
+        urlpatterns = [
+            path('api/v1/article/',views.ArticleView.as_view(),name='art_icle'),
+        ]

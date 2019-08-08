@@ -3,7 +3,9 @@
 
       <div class="nav-link" v-for="artchapter in artchapters" v-if="art_id==artchapter.article_id"> 
           <router-link  :to="{path:'/look_chapter',query:{id:artchapter.article_id,idd:artchapter.id}}" >
-         <pre>{{artchapter.chapter_name}}</pre>
+        <!--  <pre>{{artchapter.chapter_name}}</pre>
+         <div class="card-body" v-html="item.chapter_content"></div> -->
+         <div  v-html="artchapter.chapter_name"></div>
          </router-link>
       </div>
    </div>
@@ -15,14 +17,21 @@
             return{
               //article文章列表页面传递过来的参数 route.query.id给art_id
               art_id:this.$route.query.id,
-              
+              artchapters:[]
             }
         },
         computed:{
-            artchapters(){
-               return this.$store.state.allchapterlist;
-            },
         },
+        mounted(){            
+            axios
+                .get('http://127.0.0.1:8000/api/v1/artchapter/?id='+this.art_id)
+                .then(response => (this.artchapters = response.data))
+                .catch(function(error){
+                    consonle.log(error);
+                });
+        },
+
+
   }
 </script>
 

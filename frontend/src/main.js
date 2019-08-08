@@ -14,6 +14,7 @@ const store = new Vuex.Store({
         //这个状态跟每个组件数据属性关联
         //作品列表
         allarticlelist:[],
+
         //章节列表
         allchapterlist:[],
     },
