@@ -50,7 +50,7 @@
         },
         mounted(){
           axios
-            .get('http://127.0.0.1:8000/api/v1/article/?page='+this.id)
+            .get('http://www.ohlaa.com/api/v1/article/?page='+this.id)
             .then(response => (this.articles = response.data.results))
             .catch(function (error) { // 请求失败处理
               console.log(error);
