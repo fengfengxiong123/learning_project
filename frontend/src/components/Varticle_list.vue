@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-<!--    <h3>
-          <router-link  :to="routes[0].url">{{routes[0].title}}</router-link>
-        </h3> -->
+   <h3>
+          <router-link class="nav-link" :to="{path:'/article_list',query:{pageNum:2,pageSize:1}}">xiayiye</router-link>
+        </h3>{{total_count}}{{previous_url}}{{next_url}}
         <p>
         <table class="table">
           <thead v-if="articles">
@@ -44,18 +44,22 @@
               {url:'/new_article',title:'发布'},
               {url:'/look_chapter',title:'发布'},
               ],
-              articles:[],              
-              id:this.$route.query.pageNum,
+              articles:[],
+              total_count:[], //总数          
+              pagenum_id:this.$route.query.pageNum,//第n页
+              pagesize_id:this.$route.query.pageSize,//第n页显示数量
+
             }
         },
         mounted(){
           axios
-            // .get('http://www.ohlaa.com/api/v1/article/?page='+this.id)
-            .get('http://127.0.0.1:8000/api/v1/article/?page='+this.id)
-            .then(response => (this.articles = response.data.results))
+            // .get('http://www.ohlaa.com/api/v1/article/?page='+this.pagenum_id+'&size='+this.pagesize_id)
+            .get('http://127.0.0.1:8000/api/v1/article/?page='+this.pagenum_id+'&size='+this.pagesize_id)
+            .then(response => (this.articles = response.data.results,this.total_count = response.data.count))
             .catch(function (error) { // 请求失败处理
               console.log(error);
             });
+
         },
     }
 </script>

@@ -45,8 +45,6 @@ class ChapteContentSerializer(serializers.Serializer):
 	article_id=serializers.CharField(source='article.id',read_only=True)
 	chapter_add_date=serializers.DateTimeField()
 
-
-
 class ArtChapterView(APIView):
 	def get(self,request,*args,**kwargs):
 
@@ -82,11 +80,14 @@ from django.contrib.auth.models import User
 from rest_framework.pagination import PageNumberPagination
 class ArticleView(APIView):
 	def get(self,request,*args,**kwargs):
+		page_id = request.query_params.dict().get('page')
+		size_id = request.query_params.dict().get('size')
+		print(page_id)
+		print(size_id)
 		article=Article.objects.all()
 		pg=MyPageNumberPagination()  #自定义分页对象
 		pager_articles = pg.paginate_queryset(queryset=article, request=request, view=self)
 		ser = ArticleSerializer(instance=pager_articles, many=True)
-		# return Response(ser.data)
 		return pg.get_paginated_response(ser.data)
 
 	def post(self,request,*args,**kwargs):

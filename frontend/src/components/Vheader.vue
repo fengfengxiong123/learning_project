@@ -9,7 +9,7 @@
     <div class="col">
       <ul class="navbar-nav mr-auto">
         <li v-for='(item,index) in routes' :class="{active:index==currentIndex}" @click='activeHandler(index)'>
-          <router-link class="nav-link" :to="{path:'/article_list',query:{pageNum:1}}">{{item.title}}</router-link>
+          <router-link class="nav-link" :to="{path:'/article_list',query:{pageNum:1,pageSize:10}}">{{item.title}}</router-link>
         </li>     
       </ul>
     </div>
