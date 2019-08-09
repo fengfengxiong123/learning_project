@@ -15,12 +15,13 @@ export default new Router({
     {//主页
       path: '/',
       name: 'Vmain',//没有关系
-      component: Vmain//一个路由映射一个组件
+      component: Vmain,//一个路由映射一个组件
     },
+
     {//链接作品列表
       path: '/article_list',
       name: 'Varticle_list',
-      component: Varticle_list
+      component: Varticle_list,
     },
     {//链接新建作品页面
       path: '/new_article',

@@ -23,7 +23,9 @@ const store = new Vuex.Store({
     }
 })
 
-
+// router.beforeEach((to,from,next)=>{
+// 未完成——动态设置title description keyword
+// });
 
 
 /* eslint-disable no-new */

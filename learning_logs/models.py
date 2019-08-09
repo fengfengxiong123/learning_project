@@ -19,6 +19,9 @@ class Article(models.Model):
 	art_status=models.CharField('状态',max_length=200,default="")
 	art_introduction=models.CharField('简介',max_length=200,default="")
 	art_name_used=models.CharField('曾用名',max_length=200,default="")
+
+	class Meta:
+		ordering = ['art_add_date']
 		
 	def __str__(self):
 		if len(self.art_name)>=20:

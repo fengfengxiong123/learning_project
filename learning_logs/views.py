@@ -6,21 +6,27 @@ from . models import Article,ArtChapter,ArtLabel,ArtHot,ArtDiscuss
 from . forms import ArticleForm,ArtChapterForm
 from django.core.paginator import Paginator
 from rest_framework.response import Response
-
-def search(request):
-	"""搜索功能"""
-	search_name=request.GET.get('search_name')
-	error_msg=''
-
-	if not search_name:
-		error_msg='请输入关键词'
-
-		return render(request,'learning_logs/index.html',{'error_msg': error_msg})
-	articles=Article.objects.filter(art_name__icontains=search_name)
-	return render(request,'learning_logs/search_results.html',
-		{'error_msg': error_msg,'articles': articles})
-
 from rest_framework.views import APIView
+
+class SearchView(APIView):
+	def get(self,request,*args,**kwargs):
+		search_name=request.GET.get('search_name')
+		error_msg = ''
+		if not search_name:
+			error_msg='请输入关键词'
+			print(type(error_msg))
+			print(type(json.dumps(error_msg)))
+			return HttpResponse(error_msg)
+
+		articles = Article.objects.filter(art_name__icontains=search_name)
+		ser=ArtChapterSerializer(instance=articles,many=True)
+		ret=json.dumps(ser.data,ensure_ascii=False)
+		# print(type(ret))
+		return HttpResponse(ret)
+
+
+
+
 from django.http import HttpResponse
 
 from rest_framework import serializers
@@ -28,18 +34,28 @@ import json
 class ArtChapterSerializer(serializers.Serializer):
 	id=serializers.IntegerField()
 	chapter_name=serializers.CharField()
+	# chapter_content=serializers.CharField()
+	article_id=serializers.CharField(source='article.id',read_only=True)
+	chapter_add_date=serializers.DateTimeField()
+
+class ChapteContentSerializer(serializers.Serializer):
+	id=serializers.IntegerField()
+	chapter_name=serializers.CharField()
 	chapter_content=serializers.CharField()
 	article_id=serializers.CharField(source='article.id',read_only=True)
 	chapter_add_date=serializers.DateTimeField()
+
+
 
 class ArtChapterView(APIView):
 	def get(self,request,*args,**kwargs):
 
 		article_id=request.query_params.dict().get('id')
 		chapter_idd = request.query_params.dict().get('idd')
-		print(chapter_idd)
+		# print(chapter_idd)
 		article = Article.objects.get(id=article_id)
 		artchapter=article.artchapter_set.all()
+		# print(artchapter)
 		ser=ArtChapterSerializer(instance=artchapter,many=True)
 		ret=json.dumps(ser.data,ensure_ascii=False)
 		# print(type(ret))
@@ -96,7 +112,7 @@ class ChapteContentView(APIView):
 		chapter_idd = request.query_params.dict().get('idd')
 		article = Article.objects.get(id=article_id)
 		artchapter = article.artchapter_set.all().filter(id=chapter_idd)
-		ser=ArtChapterSerializer(instance=artchapter,many=True)
+		ser=ChapteContentSerializer(instance=artchapter,many=True)
 		ret=json.dumps(ser.data,ensure_ascii=False)
 		return HttpResponse(ret)
 

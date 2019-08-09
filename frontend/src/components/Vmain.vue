@@ -3,13 +3,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header">
-                    主页
+<!--                   <div class="card-header">
+                    哦啦-_-创造者平台
+                  </div> -->
+                  <div class="card-body">
+                    
+                    <!-- <router-link class="btn btn-primary" :to="{path:'/article_list',query:{pageNum:1}}">去学习</router-link> -->
+                    <div style="float:right">
+                    <router-link class="btn btn-primary" :to="{path:'/article_list',query:{pageNum:1}}">去看</router-link>
+                    </div>
+                    <div>《西游记》、《三国演义》、《水浒传》、《红楼梦》、《论语》、《道德经》、古典文学、古代小说、名著</div>
+
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">哦啦创造者平台</h5>
-                    <p class="card-text">系统学习知识，创造优质内容</p>
-                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    <h6 class="card-title">先学习，后娱乐！</h6>
                   </div>
                 </div>
             </div>
