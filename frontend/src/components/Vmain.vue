@@ -10,7 +10,7 @@
                     
                     <!-- <router-link class="btn btn-primary" :to="{path:'/article_list',query:{pageNum:1}}">去学习</router-link> -->
                     <div style="float:right">
-                    <router-link class="btn btn-primary" :to="{path:'/article_list',query:{pageNum:1,pageSize:10}}">去看</router-link>
+                    <router-link class="btn btn-primary" :to="{path:'/article_list'}">去看</router-link>
                     </div>
                     <div>《西游记》、《三国演义》、《水浒传》、《红楼梦》、《论语》、《道德经》、古典文学、古代小说、名著</div>
 
@@ -21,16 +21,26 @@
                 </div>
             </div>
         </div>
+       <div>
+            <div class="py-3 bg-white fixed-bottom">
+                <div class="container">
+                    <p class="m-0 text-center text-dark">Copyright &copy; www.ohlaa.com 2019
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+
 </template>
 <script>
     export default{
         name:"Vmain",
         data(){
             return{
-
             }
-        }
+        },
+
+
     }
 </script>
 

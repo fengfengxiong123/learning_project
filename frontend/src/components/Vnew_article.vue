@@ -61,15 +61,6 @@
               return this.$store.state.allarticlelist.art_type;
             }
           },
-          // user_ownerHander:{
-          //   set:function(newValue){
-          //     // console.log(newValue)
-          //     this.$store.state.note.user_owner=newValue;
-          //   },
-          //   get:function(){
-          //     return this.$store.state.note.user_owner;
-          //   }
-          // },
         },
        
     }

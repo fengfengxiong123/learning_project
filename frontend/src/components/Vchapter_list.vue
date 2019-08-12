@@ -24,9 +24,9 @@
         },
         mounted(){            
             axios
-                // .get('http://www.ohlaa.com/api/v1/artchapter/?id='+this.art_id)
+                .get('http://www.ohlaa.com/api/v1/artchapter/?id='+this.art_id)
                 
-                .get('http://127.0.0.1:8000/api/v1/artchapter/?id='+this.art_id)
+                // .get('http://127.0.0.1:8000/api/v1/artchapter/?id='+this.art_id)
                 .then(response => (this.artchapters = response.data))
                 .catch(function(error){
                     consonle.log(error);

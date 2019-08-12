@@ -5,11 +5,12 @@
 
     <div class="col">
       <a class="nav-link" href="/">主站</a>
+
     </div>
     <div class="col">
       <ul class="navbar-nav mr-auto">
         <li v-for='(item,index) in routes' :class="{active:index==currentIndex}" @click='activeHandler(index)'>
-          <router-link class="nav-link" :to="{path:'/article_list',query:{pageNum:1,pageSize:10}}">{{item.title}}</router-link>
+          <router-link class="nav-link" :to="{path:'/article_list'}">{{item.title}}</router-link>
         </li>     
       </ul>
     </div>
@@ -17,9 +18,12 @@
       <form class="form-inline mr-auto my-2 my-lg-0">
         <!-- {{csrf_token}} -->
         <input class="form-control  col" type="search" placeholder="" aria-label="Search" name="search_name" required>
-        <button class="btn btn-outline-success my-1 my-sm-2 col" style="float:right" type="submit">搜</button>
+        <button  class="btn btn-outline-success my-1 my-sm-2 col" style="float:right" type="submit">搜</button>
+
+
       </form>
     </div>
+ 
 
   </nav>
 
@@ -35,13 +39,17 @@
                 // {url:'/animation',title:'动漫'},
                 {url:'/article_list',title:'古文'}
                 ],
-                currentIndex:0
+                currentIndex:0,
             }
         },
+        created(){
+
+        },
         methods:{
+
             activeHandler(index){
                 this.currentIndex=index;
-            }
+            },
         },
         created(){
             // console.log(111)
@@ -54,6 +62,5 @@
         }
     }
 </script>
-
 <style>
 </style>
