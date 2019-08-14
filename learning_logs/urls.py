@@ -8,5 +8,6 @@ urlpatterns = [
     path('api/v1/artchapter/',views.ArtChapterView.as_view(),name='art_chapter'),
     path('api/v1/article/',views.ArticleView.as_view(),name='art_icle'),
     path('api/v1/chaptercontent/',views.ChapteContentView.as_view(),name='chap_cont'),
+    path('api/v1/testarticle/',views.TestArticle.as_view()),
     ]
 

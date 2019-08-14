@@ -153,6 +153,15 @@ class ChapteContentView(APIView):
 		ret=json.dumps(ser.data,ensure_ascii=False)
 		return HttpResponse(ret)
 
+class TestArticle(APIView):
+	def get(self,request,*args,**kwargs):
+
+		article=Article.objects.all().filter(art_type='玄')
+		print(article)
+		ser=ArticleSerializer(instance=article,many=True)
+		ret=ser.data
+		return Response(ret)
+
 
 
 
