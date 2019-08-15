@@ -13,21 +13,6 @@ import json
 from django.contrib.auth.models import User
 from rest_framework.pagination import PageNumberPagination
 
-class SearchView(APIView):
-	def get(self,request,*args,**kwargs):
-		search_name=request.GET.get('search_name')
-		error_msg = ''
-		if not search_name:
-			error_msg='请输入关键词'
-			print(type(error_msg))
-			print(type(json.dumps(error_msg)))
-			return HttpResponse(error_msg)
-
-		articles = Article.objects.filter(art_name__icontains=search_name)
-		ser=ArtChapterSerializer(instance=articles,many=True)
-		ret=json.dumps(ser.data,ensure_ascii=False)
-		# print(type(ret))
-		return HttpResponse(ret)
 
 #三个序列化
 class ArticleSerializer(serializers.Serializer):
@@ -66,15 +51,14 @@ class MyPageNumberPagination(PageNumberPagination):
 	page_size_query_param = 'pageSize'
 	page_query_param = 'pageNum'
 
-#三个接口api
+#接口api
 class ArticleView(APIView):
 	def get(self,request,*args,**kwargs):
 		# page_id = request.query_params.dict().get('pageNum')
-		# size_id = request.query_params.dict().get('pageSize')
-
 		search_name=request.GET.get('search_name')
 		pageNum=request.GET.get('pageNum')
 		pageSize=request.GET.get('pageSize')
+		ca=request.GET.get('ca')
 		if pageNum or pageSize:
 			print(request.GET)
 			article=Article.objects.all()
@@ -111,11 +95,21 @@ class ArticleView(APIView):
 				ret['msg']='失败'
 			# return pg.get_paginated_response(ret)
 			return Response(ret)
+		elif ca:
+			articles = Article.objects.all().filter(art_type=ca)
+			ser = ArticleSerializer(instance=articles, many=True)
+			ret = {'code': 1000, 'msg': None, 'lens': None, 'data': None}
+			try:
+				ret['msg'] = '成功'
+				ret['data'] = ser.data
+				ret['lens'] = len(articles)
+			except Exception as e:
+				ret['code'] = 1001
+				ret['msg'] = '失败'
+			return Response(ret)
 		else:
-			print('错误500')
-
-
-
+			ret='无效请求'
+			return HttpResponse(ret)
 	def post(self,request,*args,**kwargs):
 		dat=request.data
 		ser=ArticleSerializer(data=dat)
@@ -130,17 +124,21 @@ class ArticleView(APIView):
 
 class ArtChapterView(APIView):
 	def get(self,request,*args,**kwargs):
-
 		article_id=request.query_params.dict().get('id')
-		chapter_idd = request.query_params.dict().get('idd')
-		# print(chapter_idd)
+		print(article_id)
 		article = Article.objects.get(id=article_id)
 		artchapter=article.artchapter_set.all()
 		# print(artchapter)
 		ser=ArtChapterSerializer(instance=artchapter,many=True)
-		ret=json.dumps(ser.data,ensure_ascii=False)
-		# print(type(ret))
-		return HttpResponse(ret)
+		ret={'code':1000,'msg':None,'lens':None,'data':None}
+		try:
+			ret['msg']='成功'
+			ret['lens']=len(artchapter)
+			ret['data']=ser.data
+		except Exception as e:
+			ret['code']=1001
+			ret['msg']='失败'
+		return Response(ret)
 		# return artchapter.get_paginated_response(ser.data)
 
 class ChapteContentView(APIView):
@@ -150,16 +148,14 @@ class ChapteContentView(APIView):
 		article = Article.objects.get(id=article_id)
 		artchapter = article.artchapter_set.all().filter(id=chapter_idd)
 		ser=ChapteContentSerializer(instance=artchapter,many=True)
-		ret=json.dumps(ser.data,ensure_ascii=False)
-		return HttpResponse(ret)
-
-class TestArticle(APIView):
-	def get(self,request,*args,**kwargs):
-
-		article=Article.objects.all().filter(art_type='玄')
-		print(article)
-		ser=ArticleSerializer(instance=article,many=True)
-		ret=ser.data
+		ret={'code':1000,'msg':None,'lens':None,'data':None}
+		try:
+			ret['msg']='成功'
+			ret['data']=ser.data
+			ret['lens']=len(artchapter)
+		except Exception as e:
+			ret['code']=1001
+			ret['msg']='失败'
 		return Response(ret)
 
 

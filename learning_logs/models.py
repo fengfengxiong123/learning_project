@@ -15,7 +15,27 @@ class Article(models.Model):
 	art_add_date=models.DateTimeField(auto_now_add=True)
 	art_author=models.CharField('作者',max_length=10,default="")
 	user_owner=models.ForeignKey(User,on_delete=models.CASCADE)
-	art_type=models.CharField(max_length=20,choices=(('流行',('玄幻','奇幻','科幻','武侠','仙侠','都市','言情','历史')),('经典','jingdian')))
+	type_choices=[
+		('流行',(
+			('xuanhuan','玄幻'),
+			('qihuan','奇幻'),
+			('kehuan', '科幻'),
+			('wuxia', '武侠'),
+			('xianxia', '仙侠'),
+			('dushi', '都市'),
+			('yanqing', '言情'),
+			('lishi', '历史'),
+		) ),
+		('经典',(
+			('mingzhu','名著'),
+			('shenhua','神话'),
+			('xiaoshuo','小说'),
+			('zhuzi','诸子'),
+			('shici','诗词'),
+			('shishu','史书'),
+		))
+	]
+	art_type=models.CharField(max_length=200,choices=type_choices)
 	art_status=models.CharField('状态',max_length=200,default="")
 	art_introduction=models.CharField('简介',max_length=200,default="")
 	art_name_used=models.CharField('曾用名',max_length=200,default="")
